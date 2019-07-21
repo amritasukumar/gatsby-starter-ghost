@@ -35,7 +35,6 @@ const WebsiteMeta = ({ data, settings, canonical, title, description, image, typ
                 <meta name="twitter:url" content={canonical} />
                 {settings.twitter && <meta name="twitter:site" content={`https://twitter.com/${settings.twitter.replace(/^@/, ``)}/`} />}
                 {settings.twitter && <meta name="twitter:creator" content={settings.twitter} />}
-                <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5d33edafba941200129ff9d1&product=sop' async='async'></script>
                 <script type="application/ld+json">{`
                     {
                         "@context": "https://schema.org/",
