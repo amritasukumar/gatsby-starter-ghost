@@ -1,0 +1,10 @@
+{
+  "development": {
+    "apiUrl": "http://ec2-34-221-177-224.us-west-2.compute.amazonaws.com",
+    "contentApiKey": "67e341dddc7bb5e09181f9cc33"
+  },
+  "production": {
+    "apiUrl": "http://ec2-34-221-177-224.us-west-2.compute.amazonaws.com",
+    "contentApiKey": "67e341dddc7bb5e09181f9cc33"
+  }
+}
