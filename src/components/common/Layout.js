@@ -117,9 +117,9 @@ const DefaultLayoutSettingsQuery = props => (
                         }
                     }
                 }
-                file(relativePath: {eq: "logo-small.png"}) {
+                file(relativePath: {eq: "logo-large.png"}) {
                     childImageSharp {
-                        fixed(width: 30, height: 30) {
+                        fixed(width: 175, height: 30) {
                             ...GatsbyImageSharpFixed
                         }
                     }
