@@ -555,6 +555,17 @@ h6 {
     object-fit: cover;
 }
 
+.post-social-share-container {
+    position: fixed;
+    top: 50%;
+    bottom: 50%;
+    left: 0;
+}
+
+.post-social-share-container > div {
+    cursor: pointer;
+}
+
 .content-body h1,
 .content-body h2,
 .content-body h3,

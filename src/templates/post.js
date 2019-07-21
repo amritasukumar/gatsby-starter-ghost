@@ -5,6 +5,14 @@ import Helmet from 'react-helmet'
 
 import { Layout } from '../components/common'
 import { MetaData } from '../components/common/meta'
+import {
+    FacebookShareButton,
+    FacebookIcon,
+    TwitterShareButton,
+    TwitterIcon,
+    LinkedinShareButton,
+    LinkedinIcon,
+} from 'react-share'
 
 /**
 * Single post view (/:slug)
@@ -27,6 +35,17 @@ const Post = ({ data, location }) => {
                 </Helmet>
                 <Layout>
                     <div className="container">
+                        <div className="post-social-share-container">
+                            <FacebookShareButton url={ post.url } >
+                                <FacebookIcon size={32}></FacebookIcon>
+                            </FacebookShareButton>
+                            <TwitterShareButton url={ post.url } >
+                                <TwitterIcon size={32}></TwitterIcon>
+                            </TwitterShareButton>
+                            <LinkedinShareButton url={ post.url } >
+                                <LinkedinIcon size={32}></LinkedinIcon>
+                            </LinkedinShareButton>
+                        </div>
                         <article className="content">
                             { post.feature_image ?
                                 <figure className="post-feature-image">
@@ -34,7 +53,6 @@ const Post = ({ data, location }) => {
                                 </figure> : null }
                             <section className="post-full-content">
                                 <h1 className="content-title">{post.title}</h1>
-
                                 {/* The main post content */ }
                                 <section
                                     className="content-body load-external-scripts"
