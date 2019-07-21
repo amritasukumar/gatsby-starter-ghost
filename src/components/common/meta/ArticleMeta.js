@@ -24,6 +24,7 @@ const ArticleMetaGhost = ({ data, settings, canonical }) => {
     return (
         <>
             <Helmet>
+                <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5ce7591aa8efb80012362317&product=sticky-share-buttons' async='async'></script>
                 <title>{ghostPost.meta_title || ghostPost.title}</title>
                 <meta name="description" content={ghostPost.meta_description || ghostPost.excerpt} />
                 <link rel="canonical" href={canonical} />
