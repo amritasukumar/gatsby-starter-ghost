@@ -557,13 +557,26 @@ h6 {
 
 .post-social-share-container {
     position: fixed;
+    display: flex;
+    flex-direction: column;
     top: 50%;
-    bottom: 50%;
     left: 0;
+    right: auto;
+    transform: translate(0, -50%);
 }
 
 .post-social-share-container > div {
     cursor: pointer;
+}
+
+@media (max-width: 800px) {
+    .post-social-share-container {
+        flex-direction: row;
+        top: auto;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
 }
 
 .content-body h1,

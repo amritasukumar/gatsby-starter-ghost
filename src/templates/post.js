@@ -12,6 +12,12 @@ import {
     TwitterIcon,
     LinkedinShareButton,
     LinkedinIcon,
+    WhatsappIcon,
+    WhatsappShareButton,
+    PinterestIcon,
+    PinterestShareButton,
+    RedditIcon,
+    RedditShareButton,
 } from 'react-share'
 
 /**
@@ -22,7 +28,6 @@ import {
 */
 const Post = ({ data, location }) => {
     const post = data.ghostPost
-
     return (
             <>
                 <MetaData
@@ -45,6 +50,15 @@ const Post = ({ data, location }) => {
                             <LinkedinShareButton url={ post.url } >
                                 <LinkedinIcon size={32}></LinkedinIcon>
                             </LinkedinShareButton>
+                            <WhatsappShareButton url={ post.url } >
+                                <WhatsappIcon size={32}></WhatsappIcon>
+                            </WhatsappShareButton>
+                            <PinterestShareButton url={ post.url } >
+                                <PinterestIcon size={32}></PinterestIcon>
+                            </PinterestShareButton>
+                            <RedditShareButton url={ post.url } >
+                                <RedditIcon size={32}></RedditIcon>
+                            </RedditShareButton>
                         </div>
                         <article className="content">
                             { post.feature_image ?
