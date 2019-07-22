@@ -443,12 +443,12 @@ blockquote cite a {
 }
 
 a {
-    color: #26a8ed;
-    text-decoration: none;
+    color: #000000;
+    text-decoration: underline;
 }
 
 a:hover {
-    text-decoration: underline;
+    color: #444444;
 }
 
 h1,
@@ -711,7 +711,7 @@ h6 {
 }
 
 .site-nav-icon {
-    height: 15px;
+    height: 20px;
     margin: -5px 0 0;
 }
 
