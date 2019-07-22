@@ -20,8 +20,10 @@ import '../../styles/app.css'
 */
 const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
     const site = data.allGhostSettings.edges[0].node
-    const twitterUrl = site.twitter ? `https://twitter.com/${site.twitter.replace(/^@/, ``)}` : null
-    const facebookUrl = site.facebook ? `https://www.facebook.com/${site.facebook.replace(/^\//, ``)}` : null
+    const twitterUrl = 'https://twitter.com/youpaired'
+    const facebookUrl = 'https://www.facebook.com/youpaired'
+    const instagramUrl = 'https://www.instagram.com/youpaired'
+    const linkedinUrl = 'https://linkedin.com/company/youpaired/'
 
     return (
     <>
@@ -47,8 +49,18 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                                 </Link>
                             </div>
                             <div className="site-mast-right">
-                                { site.twitter && <a href={ twitterUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/twitter.svg" alt="Twitter" /></a>}
-                                { site.facebook && <a href={ facebookUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/facebook.svg" alt="Facebook" /></a>}
+                                <a href={ twitterUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer">
+                                    <img className="site-nav-icon" src="/images/icons/twitter.svg" alt="Twitter" />
+                                </a>
+                                <a href={ facebookUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer">
+                                    <img className="site-nav-icon" src="/images/icons/facebook.svg" alt="Facebook" />
+                                </a>
+                                <a href={ instagramUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer">
+                                    <img className="site-nav-icon" src="/images/icons/instagram.svg" alt="Instagram" />
+                                </a>
+                                <a href={ linkedinUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer">
+                                    <img className="site-nav-icon" src="/images/icons/linkedin.svg" alt="Linkedin" />
+                                </a>
                                 <a className="site-nav-item" href={ `https://feedly.com/i/subscription/feed/${config.siteUrl}/rss/` } target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/rss.svg" alt="RSS Feed" /></a>
                             </div>
                         </div>

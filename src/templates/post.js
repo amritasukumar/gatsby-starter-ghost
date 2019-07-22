@@ -42,22 +42,22 @@ const Post = ({ data, location }) => {
                     <div className="container">
                         <div className="post-social-share-container">
                             <FacebookShareButton url={ post.url } >
-                                <FacebookIcon size={32}></FacebookIcon>
+                                <FacebookIcon size={40}></FacebookIcon>
                             </FacebookShareButton>
                             <TwitterShareButton url={ post.url } >
-                                <TwitterIcon size={32}></TwitterIcon>
+                                <TwitterIcon size={40}></TwitterIcon>
                             </TwitterShareButton>
                             <LinkedinShareButton url={ post.url } >
-                                <LinkedinIcon size={32}></LinkedinIcon>
+                                <LinkedinIcon size={40}></LinkedinIcon>
                             </LinkedinShareButton>
                             <WhatsappShareButton url={ post.url } >
-                                <WhatsappIcon size={32}></WhatsappIcon>
+                                <WhatsappIcon size={40}></WhatsappIcon>
                             </WhatsappShareButton>
-                            <PinterestShareButton url={ post.url } >
-                                <PinterestIcon size={32}></PinterestIcon>
+                            <PinterestShareButton url={ post.url } media={ post.feature_image }>
+                                <PinterestIcon size={40}></PinterestIcon>
                             </PinterestShareButton>
                             <RedditShareButton url={ post.url } >
-                                <RedditIcon size={32}></RedditIcon>
+                                <RedditIcon size={40}></RedditIcon>
                             </RedditShareButton>
                         </div>
                         <article className="content">
