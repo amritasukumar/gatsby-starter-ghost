@@ -1012,6 +1012,21 @@ h6 {
 /* Footer
 /* ---------------------------------------------------------- */
 
+.subscribe-email-form {
+    max-width: 1120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.email-text {
+    height: 20px;
+}
+
+.email-button {
+}
+
 .site-foot {
     padding: 20px 0 40px 0;
     color: rgba(255,255,255,0.7);

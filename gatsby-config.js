@@ -180,5 +180,11 @@ module.exports = {
         `gatsby-plugin-react-helmet`,
         `gatsby-plugin-force-trailing-slashes`,
         `gatsby-plugin-offline`,
+        {
+            resolve: 'gatsby-plugin-mailchimp',
+            options: {
+                endpoint: 'https://gmail.us3.list-manage.com/subscribe/post?u=88e8e4ffe09baa80dbb11fefb&amp;id=1943c15848',
+            },
+        },
     ],
 }

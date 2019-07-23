@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { Link, StaticQuery, graphql } from 'gatsby'
+import addToMailchimp from 'gatsby-plugin-mailchimp'
 import Img from 'gatsby-image'
 
 import { Navigation } from '.'
@@ -24,6 +25,23 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
     const facebookUrl = 'https://www.facebook.com/youpaired'
     const instagramUrl = 'https://www.instagram.com/youpaired'
     const linkedinUrl = 'https://linkedin.com/company/youpaired/'
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const email = document.getElementById('subscriberEmail').value;
+        addToMailchimp(email)
+            .then(({ msg, result }) => {
+                console.log('msg', `${result}: ${msg}`);
+
+                if (result !== 'success') {
+                    throw msg;
+                }
+            })
+            .catch((err) => {
+                console.log('err', err);
+            });
+    }
+
 
     return (
     <>
@@ -88,6 +106,16 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
 
             <div className="viewport-bottom">
                 {/* The footer at the very bottom of the screen */}
+                <form onSubmit={handleSubmit} className="subscribe-email-form">
+                    <input
+                        type="email"
+                        placeholder="email"
+                        name="email"
+                        id="subscriberEmail"
+                        className="emailText"
+                    />
+                    <input type="submit" className="emailButton"/>
+                </form>
                 <footer className="site-foot">
                     <div className="site-foot-nav container">
                         <div className="site-foot-nav-left">
