@@ -25,20 +25,27 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
     const facebookUrl = 'https://www.facebook.com/youpaired'
     const instagramUrl = 'https://www.instagram.com/youpaired'
     const linkedinUrl = 'https://linkedin.com/company/youpaired/'
+    let subscribeError = ''
+    let hasSubscribed = false
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const email = document.getElementById('subscriberEmail').value;
         addToMailchimp(email)
             .then(({ msg, result }) => {
-                console.log('msg', `${result}: ${msg}`);
-
+                // debugger;
+                // console.log('msg', `${result}: ${msg}`);
                 if (result !== 'success') {
                     throw msg;
                 }
+                hasSubscribed = true;
             })
             .catch((err) => {
-                console.log('err', err);
+                const junkIndex = err.indexOf(' <');
+                if (junkIndex > 0) {
+                    err = err.substring(0, junkIndex);
+                }
+                subscribeError = err;
             });
     }
 
@@ -106,16 +113,28 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
 
             <div className="viewport-bottom">
                 {/* The footer at the very bottom of the screen */}
-                <form onSubmit={handleSubmit} className="subscribe-email-form">
-                    <input
-                        type="email"
-                        placeholder="email"
-                        name="email"
-                        id="subscriberEmail"
-                        className="emailText"
-                    />
-                    <input type="submit" className="emailButton"/>
-                </form>
+                <section className="subscribe-email-container">
+                    <div className="subscribe-email-description">
+                        <h1>GET A CRASH COURSE ON EVENT SPONSORSHIP PROPOSAL</h1>
+                        <p>Sign up for our newsletter and learn about upcoming sponsorship trends.
+                        The ultimate guide to event sponsorship opportunities for event organizers and brand partners.</p>
+                        <span className="subscribe-email-error">{ subscribeError }</span>
+                    </div>
+                    { hasSubscribed && <span className="subscribe-email-thanks">Thanks for subscribing!</span> }
+                    { !hasSubscribed && <form onSubmit={handleSubmit} className="subscribe-email-form">
+                        <input
+                            type="email"
+                            placeholder="Your Email Address"
+                            name="email"
+                            id="subscriberEmail"
+                            className="email-text"
+                        />
+                        <span className="subscribe-terms">By entering your email, you agree to receive this and other marketing content
+                        about YouPaired. You may opt-out of future marketing emails at any time.
+                        Read our <a href="https://youpaired.com/privacy" target="_blank">Privacy Policy here</a>.</span>
+                        <input type="submit" className="email-button" value="SUBSCRIBE"/>
+                    </form> }
+                </section>
                 <footer className="site-foot">
                     <div className="site-foot-nav container">
                         <div className="site-foot-nav-left">
@@ -166,5 +185,52 @@ const DefaultLayoutSettingsQuery = props => (
         render={data => <DefaultLayout data={data} {...props} />}
     />
 )
+
+
+DefaultLayout.propTypes = {
+    children: PropTypes.node.isRequired,
+    bodyClass: PropTypes.string,
+    isHome: PropTypes.bool,
+    data: PropTypes.shape({
+        allGhostSettings: PropTypes.object.isRequired,
+    }).isRequired,
+}
+
+
+// class DefaultLayoutSettingsQuery extends React.Component {
+//     constructor(props) {
+//       super(props);
+//       this.state = { showMenu: true };
+//     }
+
+//     render() {
+//         debugger;
+//         const { children, data } = this.props;
+//         return (<StaticQuery
+//             query={graphql`
+//                 query GhostSettings {
+//                     allGhostSettings {
+//                         edges {
+//                             node {
+//                                 ...GhostSettingsFields
+//                             }
+//                         }
+//                     }
+//                     file(relativePath: {eq: "logo-large.png"}) {
+//                         childImageSharp {
+//                             fixed(width: 175, height: 30) {
+//                                 ...GatsbyImageSharpFixed
+//                             }
+//                         }
+//                     }
+//                 }
+//             `}
+//             render={data => <DefaultLayout data={data} {...props} />}
+//         />)
+
+//         // return (<DefaultLayout data={data} {...props} />)
+//     }
+
+// }
 
 export default DefaultLayoutSettingsQuery

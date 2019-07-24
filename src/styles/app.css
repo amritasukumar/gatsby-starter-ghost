@@ -754,6 +754,14 @@ h6 {
     opacity: 0.7;
 }
 
+@media (max-width: 500px) {
+    .site-banner {
+        max-width: 100%;
+        padding: 4vw 0 !important;
+        text-align: left;
+    }
+}
+
 .site-nav {
     display: flex;
     align-items: center;
@@ -1012,19 +1020,86 @@ h6 {
 /* Footer
 /* ---------------------------------------------------------- */
 
+.subscribe-email-container {
+    width: 100%;
+    overflow: hidden;
+    background-color: #f1faff;
+    color: #444444;
+    text-align: center;
+}
+
+.subscribe-email-description {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.subscribe-email-description > h1 {
+    margin: 20px;
+    font-size: 25px;
+}
+
+.subscribe-email-description > p {
+    margin: 20px;
+    font-size: 16px;
+}
+
 .subscribe-email-form {
-    max-width: 1120px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-bottom: 16px;
+}
+
+.subscribe-terms {
+    font-size: 10px;
+    max-width: 460px;
+    text-align: left;
+    margin: 2px 0;
+}
+
+.subscribe-email-error {
+    color: red;
+}
+
+.subscribe-email-thanks {
+    font-size: 16px;
 }
 
 .email-text {
-    height: 20px;
+    margin: 10px auto;
+    color: #999;
+    padding: 25px 15px;
+    text-align: center;
+    width: 100%;
+    max-width: 460px;
+    height: 35px;
+    border: 1px solid #e6e6e6;
+    font-size: 16px;
 }
 
 .email-button {
+    font-size: 20px;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    padding: 10px 0;
+    width: 100%;
+    max-width: 460px;
+    color: #fff;
+    background-color: #002978;
+    border: 1px solid #002978;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+.email-button:hover {
+    opacity: 0.9;
+}
+
+@media (max-width: 500px) {
+    .subscribe-email-container {
+        text-align: left;
+    }
 }
 
 .site-foot {
