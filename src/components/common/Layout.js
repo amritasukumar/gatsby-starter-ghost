@@ -131,7 +131,7 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                         />
                         <span className="subscribe-terms">By entering your email, you agree to receive this and other marketing content
                         about YouPaired. You may opt-out of future marketing emails at any time.
-                        Read our <a href="https://youpaired.com/privacy" target="_blank">Privacy Policy here</a>.</span>
+                        Read our <a href="https://youpaired.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy here</a>.</span>
                         <input type="submit" className="email-button" value="SUBSCRIBE"/>
                     </form> }
                 </section>
