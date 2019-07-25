@@ -444,11 +444,6 @@ blockquote cite a {
 
 a {
     color: #000000;
-    text-decoration: underline;
-}
-
-a:hover {
-    color: #444444;
 }
 
 h1,
@@ -540,6 +535,14 @@ h6 {
     display: flex;
     flex-direction: column;
     font-family: var(--font-serif);
+}
+
+.content-body a {
+    color: #000;
+}
+
+.content-body a:hover {
+    color: blue;
 }
 
 .post-full-content {
@@ -703,10 +706,11 @@ h6 {
     padding: 5px 10px;
     color: #fff;
     opacity: 0.7;
+    text-decoration: none;
 }
 
 .site-nav-item:hover {
-    text-decoration: none;
+    text-decoration: underline;
     opacity: 1;
 }
 
