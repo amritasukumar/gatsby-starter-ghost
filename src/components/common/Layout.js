@@ -126,12 +126,12 @@ class DefaultLayout extends React.Component {
                         </div>
                         { this.state.hasSubscribed && <div className="subscribe-email-thanks">Thanks for subscribing!</div> }
                         { !this.state.hasSubscribed && <form onSubmit={this.handleSubmit} className="subscribe-email-form">
-                            <label htmlFor="subscriberEmail">Subscriber Email</label>
                             <input
                                 type="email"
                                 placeholder="Your Email Address"
                                 name="subscriberEmail"
                                 id="subscriberEmail"
+                                aria-label="Subscriber Email"
                                 className="email-text"
                             />
                             <span className="subscribe-terms">By entering your email, you agree to receive this and other marketing content
