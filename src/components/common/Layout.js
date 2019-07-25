@@ -19,138 +19,144 @@ import '../../styles/app.css'
 * styles, and meta data for each page.
 *
 */
-const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
-    const site = data.allGhostSettings.edges[0].node
-    const twitterUrl = 'https://twitter.com/youpaired'
-    const facebookUrl = 'https://www.facebook.com/youpaired'
-    const instagramUrl = 'https://www.instagram.com/youpaired'
-    const linkedinUrl = 'https://linkedin.com/company/youpaired/'
-    let subscribeError = ''
-    let hasSubscribed = false
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const email = document.getElementById('subscriberEmail').value;
-        addToMailchimp(email)
-            .then(({ msg, result }) => {
-                // debugger;
-                // console.log('msg', `${result}: ${msg}`);
-                if (result !== 'success') {
-                    throw msg;
-                }
-                hasSubscribed = true;
-            })
-            .catch((err) => {
-                const junkIndex = err.indexOf(' <');
-                if (junkIndex > 0) {
-                    err = err.substring(0, junkIndex);
-                }
-                subscribeError = err;
-            });
+class DefaultLayout extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            subscribeError: ``,
+            hasSubscribed: false,
+        }
     }
 
+    handleSubmit = (e) => {
+        e.preventDefault()
+        const email = document.getElementById(`subscriberEmail`).value
+        addToMailchimp(email)
+            .then(({ msg, result }) => {
+                if (result !== `success`) {
+                    throw msg
+                }
+                this.setState({ hasSubscribed: true, subscribeError: `` })
+            })
+            .catch((err) => {
+                const junkIndex = err.indexOf(` <`)
+                if (junkIndex > 0) {
+                    err = err.substring(0, junkIndex)
+                }
+                this.setState({ subscribeError: err })
+            })
+    };
 
-    return (
-    <>
-        <Helmet>
-            <html lang={site.lang} />
-            <style type="text/css">{`${site.codeinjection_styles}`}</style>
-            <body className={bodyClass} />
-        </Helmet>
+    render() {
+        const { data, children, bodyClass, isHome } = this.props
+        const site = data.allGhostSettings.edges[0].node
+        const twitterUrl = `https://twitter.com/youpaired`
+        const facebookUrl = `https://www.facebook.com/youpaired`
+        const instagramUrl = `https://www.instagram.com/youpaired`
+        const linkedinUrl = `https://linkedin.com/company/youpaired/`
+        return (
+            <>
+            <Helmet>
+                <html lang={site.lang} />
+                <style type="text/css">{`${site.codeinjection_styles}`}</style>
+                <body className={bodyClass} />
+            </Helmet>
 
-        <div className="viewport">
+            <div className="viewport">
 
-            <div className="viewport-top">
-                {/* The main header section on top of the screen */}
-                <header className="site-head">
-                    <div className="container">
-                        <div className="site-mast">
-                            <div className="site-mast-left">
-                                <Link to="/">
-                                    {site.logo ?
-                                        <img className="site-logo" src={site.logo} alt={site.title} />
-                                        : <Img fixed={data.file.childImageSharp.fixed} alt={site.title} />
-                                    }
-                                </Link>
+                <div className="viewport-top">
+                    {/* The main header section on top of the screen */}
+                    <header className="site-head">
+                        <div className="container">
+                            <div className="site-mast">
+                                <div className="site-mast-left">
+                                    <Link to="/">
+                                        {site.logo ?
+                                            <img className="site-logo" src={site.logo} alt={site.title} />
+                                            : <Img fixed={data.file.childImageSharp.fixed} alt={site.title} />
+                                        }
+                                    </Link>
+                                </div>
+                                <div className="site-mast-right">
+                                    <a href={ twitterUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer">
+                                        <img className="site-nav-icon" src="/images/icons/twitter.svg" alt="Twitter" />
+                                    </a>
+                                    <a href={ facebookUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer">
+                                        <img className="site-nav-icon" src="/images/icons/facebook.svg" alt="Facebook" />
+                                    </a>
+                                    <a href={ instagramUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer">
+                                        <img className="site-nav-icon" src="/images/icons/instagram.svg" alt="Instagram" />
+                                    </a>
+                                    <a href={ linkedinUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer">
+                                        <img className="site-nav-icon" src="/images/icons/linkedin.svg" alt="Linkedin" />
+                                    </a>
+                                    <a className="site-nav-item" href={ `https://feedly.com/i/subscription/feed/${config.siteUrl}/rss/` } target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/rss.svg" alt="RSS Feed" /></a>
+                                </div>
                             </div>
-                            <div className="site-mast-right">
-                                <a href={ twitterUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer">
-                                    <img className="site-nav-icon" src="/images/icons/twitter.svg" alt="Twitter" />
-                                </a>
-                                <a href={ facebookUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer">
-                                    <img className="site-nav-icon" src="/images/icons/facebook.svg" alt="Facebook" />
-                                </a>
-                                <a href={ instagramUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer">
-                                    <img className="site-nav-icon" src="/images/icons/instagram.svg" alt="Instagram" />
-                                </a>
-                                <a href={ linkedinUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer">
-                                    <img className="site-nav-icon" src="/images/icons/linkedin.svg" alt="Linkedin" />
-                                </a>
-                                <a className="site-nav-item" href={ `https://feedly.com/i/subscription/feed/${config.siteUrl}/rss/` } target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/rss.svg" alt="RSS Feed" /></a>
+                            { isHome ?
+                                <div className="site-banner">
+                                    <h1 className="site-banner-title">{site.title}</h1>
+                                    <p className="site-banner-desc">{site.description}</p>
+                                </div> :
+                                null}
+                            <nav className="site-nav">
+                                <div className="site-nav-left">
+                                    {/* The navigation items as setup in Ghost */}
+                                    <Navigation data={site.navigation} navClass="site-nav-item" />
+                                </div>
+                            </nav>
+                        </div>
+                    </header>
+
+                    <main className="site-main">
+                        {/* All the main content gets inserted here, index.js, post.js */}
+                        {children}
+                    </main>
+
+                </div>
+
+                <div className="viewport-bottom">
+                    {/* The footer at the very bottom of the screen */}
+                    <section className="subscribe-email-container">
+                        <div className="subscribe-email-description">
+                            <h1>GET A CRASH COURSE ON EVENT SPONSORSHIP PROPOSAL</h1>
+                            <p>Sign up for our newsletter and learn about upcoming sponsorship trends.
+                            The ultimate guide to event sponsorship opportunities for event organizers and brand partners.</p>
+                            <span className="subscribe-email-error">{ this.state.subscribeError }</span>
+                        </div>
+                        { this.state.hasSubscribed && <div className="subscribe-email-thanks">Thanks for subscribing!</div> }
+                        { !this.state.hasSubscribed && <form onSubmit={this.handleSubmit} className="subscribe-email-form">
+                            <label htmlFor="subscriberEmail">Subscriber Email</label>
+                            <input
+                                type="email"
+                                placeholder="Your Email Address"
+                                name="subscriberEmail"
+                                id="subscriberEmail"
+                                className="email-text"
+                            />
+                            <span className="subscribe-terms">By entering your email, you agree to receive this and other marketing content
+                            about YouPaired. You may opt-out of future marketing emails at any time.
+                            Read our <a href="https://youpaired.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy here</a>.</span>
+                            <input type="submit" className="email-button" value="SUBSCRIBE"/>
+                        </form> }
+                    </section>
+                    <footer className="site-foot">
+                        <div className="site-foot-nav container">
+                            <div className="site-foot-nav-left">
+                                <a href="https://youpaired.com" target="_blank" rel="noopener noreferrer">YouPaired</a> © 2019
+                            </div>
+                            <div className="site-foot-nav-right">
+                                <Navigation data={site.navigation} navClass="site-foot-nav-item" />
                             </div>
                         </div>
-                        { isHome ?
-                            <div className="site-banner">
-                                <h1 className="site-banner-title">{site.title}</h1>
-                                <p className="site-banner-desc">{site.description}</p>
-                            </div> :
-                            null}
-                        <nav className="site-nav">
-                            <div className="site-nav-left">
-                                {/* The navigation items as setup in Ghost */}
-                                <Navigation data={site.navigation} navClass="site-nav-item" />
-                            </div>
-                        </nav>
-                    </div>
-                </header>
+                    </footer>
 
-                <main className="site-main">
-                    {/* All the main content gets inserted here, index.js, post.js */}
-                    {children}
-                </main>
-
+                </div>
             </div>
 
-            <div className="viewport-bottom">
-                {/* The footer at the very bottom of the screen */}
-                <section className="subscribe-email-container">
-                    <div className="subscribe-email-description">
-                        <h1>GET A CRASH COURSE ON EVENT SPONSORSHIP PROPOSAL</h1>
-                        <p>Sign up for our newsletter and learn about upcoming sponsorship trends.
-                        The ultimate guide to event sponsorship opportunities for event organizers and brand partners.</p>
-                        <span className="subscribe-email-error">{ subscribeError }</span>
-                    </div>
-                    { hasSubscribed && <span className="subscribe-email-thanks">Thanks for subscribing!</span> }
-                    { !hasSubscribed && <form onSubmit={handleSubmit} className="subscribe-email-form">
-                        <input
-                            type="email"
-                            placeholder="Your Email Address"
-                            name="email"
-                            id="subscriberEmail"
-                            className="email-text"
-                        />
-                        <span className="subscribe-terms">By entering your email, you agree to receive this and other marketing content
-                        about YouPaired. You may opt-out of future marketing emails at any time.
-                        Read our <a href="https://youpaired.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy here</a>.</span>
-                        <input type="submit" className="email-button" value="SUBSCRIBE"/>
-                    </form> }
-                </section>
-                <footer className="site-foot">
-                    <div className="site-foot-nav container">
-                        <div className="site-foot-nav-left">
-                            <a href="https://youpaired.com" target="_blank" rel="noopener noreferrer">YouPaired</a> © 2019
-                        </div>
-                        <div className="site-foot-nav-right">
-                            <Navigation data={site.navigation} navClass="site-foot-nav-item" />
-                        </div>
-                    </div>
-                </footer>
-
-            </div>
-        </div>
-
-    </>
-    )
+            </>
+        )
+    }
 }
 
 DefaultLayout.propTypes = {
@@ -162,75 +168,26 @@ DefaultLayout.propTypes = {
     }).isRequired,
 }
 
-const DefaultLayoutSettingsQuery = props => (
-    <StaticQuery
-        query={graphql`
-            query GhostSettings {
-                allGhostSettings {
-                    edges {
-                        node {
-                            ...GhostSettingsFields
-                        }
-                    }
-                }
-                file(relativePath: {eq: "logo-large.png"}) {
-                    childImageSharp {
-                        fixed(width: 175, height: 30) {
-                            ...GatsbyImageSharpFixed
-                        }
+const DefaultLayoutSettingsQuery = props => <StaticQuery
+    query={graphql`
+        query GhostSettings {
+            allGhostSettings {
+                edges {
+                    node {
+                        ...GhostSettingsFields
                     }
                 }
             }
-        `}
-        render={data => <DefaultLayout data={data} {...props} />}
-    />
-)
-
-
-DefaultLayout.propTypes = {
-    children: PropTypes.node.isRequired,
-    bodyClass: PropTypes.string,
-    isHome: PropTypes.bool,
-    data: PropTypes.shape({
-        allGhostSettings: PropTypes.object.isRequired,
-    }).isRequired,
-}
-
-
-// class DefaultLayoutSettingsQuery extends React.Component {
-//     constructor(props) {
-//       super(props);
-//       this.state = { showMenu: true };
-//     }
-
-//     render() {
-//         debugger;
-//         const { children, data } = this.props;
-//         return (<StaticQuery
-//             query={graphql`
-//                 query GhostSettings {
-//                     allGhostSettings {
-//                         edges {
-//                             node {
-//                                 ...GhostSettingsFields
-//                             }
-//                         }
-//                     }
-//                     file(relativePath: {eq: "logo-large.png"}) {
-//                         childImageSharp {
-//                             fixed(width: 175, height: 30) {
-//                                 ...GatsbyImageSharpFixed
-//                             }
-//                         }
-//                     }
-//                 }
-//             `}
-//             render={data => <DefaultLayout data={data} {...props} />}
-//         />)
-
-//         // return (<DefaultLayout data={data} {...props} />)
-//     }
-
-// }
+            file(relativePath: {eq: "logo-large.png"}) {
+                childImageSharp {
+                    fixed(width: 175, height: 30) {
+                        ...GatsbyImageSharpFixed
+                    }
+                }
+            }
+        }
+    `}
+    render={data => <DefaultLayout data={data} {...props} />}
+/>
 
 export default DefaultLayoutSettingsQuery
