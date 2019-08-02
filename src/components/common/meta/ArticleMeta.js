@@ -21,10 +21,13 @@ const ArticleMetaGhost = ({ data, settings, canonical }) => {
     const shareImage = ghostPost.feature_image ? ghostPost.feature_image : _.get(settings, `cover_image`, null)
     const publisherLogo = (settings.logo || config.siteIcon) ? url.resolve(config.siteUrl, (settings.logo || config.siteIcon)) : null
 
+    const postTitle = ghostPost.meta_title || ghostPost.title;
+    const title = `${postTitle} - ${settings.title}`
+
     return (
         <>
             <Helmet>
-                <title>{ghostPost.meta_title || ghostPost.title}</title>
+                <title>{title}</title>
                 <meta name="description" content={ghostPost.meta_description || ghostPost.excerpt} />
                 <link rel="canonical" href={canonical} />
 
@@ -33,8 +36,7 @@ const ArticleMetaGhost = ({ data, settings, canonical }) => {
                 <meta property="og:title"
                     content={
                         ghostPost.og_title ||
-                        ghostPost.meta_title ||
-                        ghostPost.title
+                        postTitle
                     }
                 />
                 <meta property="og:description"
@@ -53,8 +55,7 @@ const ArticleMetaGhost = ({ data, settings, canonical }) => {
                 <meta name="twitter:title"
                     content={
                         ghostPost.twitter_title ||
-                        ghostPost.meta_title ||
-                        ghostPost.title
+                        postTitle
                     }
                 />
                 <meta name="twitter:description"
@@ -83,7 +84,7 @@ const ArticleMetaGhost = ({ data, settings, canonical }) => {
                             ${author.sameAsArray ? `"sameAs": ${author.sameAsArray}` : ``}
                         },
                         ${publicTags.length ? `"keywords": "${_.join(publicTags, `, `)}",` : ``}
-                        "headline": "${ghostPost.meta_title || ghostPost.title}",
+                        "headline": "${postTitle}",
                         "url": "${canonical}",
                         "datePublished": "${ghostPost.published_at}",
                         "dateModified": "${ghostPost.updated_at}",
