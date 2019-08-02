@@ -3,8 +3,7 @@ module.exports = {
 
     postsPerPage: 12, // Number of posts shown on paginated pages (changes this requires sometimes to delete the cache)
 
-    siteTitleMeta: `YouPaired Blog`, // This allows an alternative site title for meta data for pages.
-    siteDescriptionMeta: `YouPaired Blog - Focuses on brands, and event organizers actionable thoughts, stories, and ideas on event sponsorship trends.`, // This allows an alternative site description for meta data for pages.
+    siteTitleDescription: `Learn How To Get Sponsored`,
 
     shareImageWidth: 1000, // Change to the width of your default share image
     shareImageHeight: 523, // Change to the height of your default share image

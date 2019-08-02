@@ -56,8 +56,8 @@ const MetaData = ({
             />
         )
     } else {
-        title = title || config.siteTitleMeta || settings.title
-        description = description || config.siteDescriptionMeta || settings.description
+        const titleDescription = config.siteTitleDescription
+        description = settings.description
         image = image || settings.cover_image || null
 
         image = image ? url.resolve(config.siteUrl, image) : null
@@ -66,7 +66,7 @@ const MetaData = ({
             <WebsiteMeta
                 data={{}}
                 canonical={canonical}
-                title={title}
+                titleDescription={titleDescription}
                 description={description}
                 image={image}
                 type="WebSite"

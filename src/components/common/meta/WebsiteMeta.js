@@ -8,7 +8,7 @@ import url from 'url'
 import ImageMeta from './ImageMeta'
 import config from '../../../utils/siteConfig'
 
-const WebsiteMeta = ({ data, settings, canonical, title, description, image, type }) => {
+const WebsiteMeta = ({ data, settings, canonical, titleDescription, description, image, type }) => {
     settings = settings.allGhostSettings.edges[0].node
 
     const publisherLogo = url.resolve(config.siteUrl, (settings.logo || config.siteIcon))
@@ -16,8 +16,8 @@ const WebsiteMeta = ({ data, settings, canonical, title, description, image, typ
 
     shareImage = shareImage ? url.resolve(config.siteUrl, shareImage) : null
 
-    description = description || data.meta_description || data.description || config.siteDescriptionMeta || settings.description
-    title = `${settings.title}`
+    description = description || data.meta_description || data.description || settings.description
+    const title = `${settings.title} - ${titleDescription}`
 
     return (
         <>
