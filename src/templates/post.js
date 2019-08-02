@@ -28,6 +28,7 @@ import {
 */
 const Post = ({ data, location }) => {
     const post = data.ghostPost
+    const url = location.href
     return (
             <>
                 <MetaData
@@ -41,22 +42,22 @@ const Post = ({ data, location }) => {
                 <Layout>
                     <div className="container">
                         <div className="post-social-share-container">
-                            <FacebookShareButton url={ post.url } >
+                            <FacebookShareButton url={ url } >
                                 <FacebookIcon size={40}></FacebookIcon>
                             </FacebookShareButton>
-                            <TwitterShareButton url={ post.url } >
+                            <TwitterShareButton url={ url } >
                                 <TwitterIcon size={40}></TwitterIcon>
                             </TwitterShareButton>
-                            <LinkedinShareButton url={ post.url } >
+                            <LinkedinShareButton url={ url } >
                                 <LinkedinIcon size={40}></LinkedinIcon>
                             </LinkedinShareButton>
-                            <WhatsappShareButton url={ post.url } >
+                            <WhatsappShareButton url={ url } >
                                 <WhatsappIcon size={40}></WhatsappIcon>
                             </WhatsappShareButton>
-                            <PinterestShareButton url={ post.url } media={ post.feature_image }>
+                            <PinterestShareButton url={ url } media={ post.feature_image }>
                                 <PinterestIcon size={40}></PinterestIcon>
                             </PinterestShareButton>
-                            <RedditShareButton url={ post.url } >
+                            <RedditShareButton url={ url } >
                                 <RedditIcon size={40}></RedditIcon>
                             </RedditShareButton>
                         </div>
