@@ -10,11 +10,8 @@ import config from '../../../utils/siteConfig'
 
 const WebsiteMeta = ({ data, settings, canonical, titleDescription, description, image, type }) => {
     settings = settings.allGhostSettings.edges[0].node
-
     const publisherLogo = url.resolve(config.siteUrl, (settings.logo || config.siteIcon))
-    let shareImage = image || data.feature_image || _.get(settings, `cover_image`, null)
-
-    shareImage = shareImage ? url.resolve(config.siteUrl, shareImage) : publisherLogo
+    const shareImage = `${config.imageUrl}/youpaired-blog-logo-metatag.jpg`
 
     description = description || data.meta_description || data.description || settings.description
     const title = `${settings.title} - ${titleDescription}`
