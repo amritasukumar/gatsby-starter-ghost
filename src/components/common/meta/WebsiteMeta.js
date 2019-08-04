@@ -11,7 +11,7 @@ import config from '../../../utils/siteConfig'
 const WebsiteMeta = ({ data, settings, canonical, titleDescription, description, image, type }) => {
     settings = settings.allGhostSettings.edges[0].node
     const publisherLogo = url.resolve(config.siteUrl, (settings.logo || config.siteIcon))
-    const shareImage = `${config.imageUrl}/youpaired-blog-logo-metatag.jpg`
+    const shareImage = url.resolve(config.imageUrl, `youpaired-blog-logo-metatag.jpg`)
 
     description = description || data.meta_description || data.description || settings.description
     const title = `${settings.title} - ${titleDescription}`
@@ -27,6 +27,7 @@ const WebsiteMeta = ({ data, settings, canonical, titleDescription, description,
                 <meta property="og:title" content={title} />
                 <meta property="og:description" content={description} />
                 <meta property="og:url" content={canonical} />
+                <meta name="fb:app_id" content={config.fbAppId}>
                 <meta name="twitter:title" content={title} />
                 <meta name="twitter:description" content={description} />
                 <meta name="twitter:url" content={canonical} />

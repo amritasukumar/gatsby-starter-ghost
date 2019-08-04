@@ -13,4 +13,5 @@ module.exports = {
     backgroundColor: `#e9e9e9`, // Used for Offline Manifest
     themeColor: `#15171A`, // Used for Offline Manifest
     imageUrl: `https://images.youpaired.com`,
+    fbAppId: `297629041071876`,
 }
