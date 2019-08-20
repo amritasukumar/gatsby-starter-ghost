@@ -4,6 +4,7 @@ import { graphql } from 'gatsby'
 
 import { Layout, PostCard, Pagination } from '../components/common'
 import { MetaData } from '../components/common/meta'
+import { OutboundLink } from 'gatsby-plugin-google-analytics'
 
 /**
 * Author page (/author/:slug)
@@ -31,9 +32,9 @@ const Author = ({ data, location, pageContext }) => {
                             <h1>{author.name}</h1>
                             {author.bio && <p>{author.bio}</p>}
                             <div className="author-header-meta">
-                                {author.website && <a className="author-header-item" href={author.website} target="_blank" rel="noopener noreferrer">Website</a>}
-                                {twitterUrl && <a className="author-header-item" href={twitterUrl} target="_blank" rel="noopener noreferrer">Twitter</a>}
-                                {facebookUrl && <a className="author-header-item" href={facebookUrl} target="_blank" rel="noopener noreferrer">Facebook</a>}
+                                {author.website && <OutboundLink className="author-header-item" href={author.website} target="_blank" rel="noopener noreferrer">Website</OutboundLink>}
+                                {twitterUrl && <OutboundLink className="author-header-item" href={twitterUrl} target="_blank" rel="noopener noreferrer">Twitter</OutboundLink>}
+                                {facebookUrl && <OutboundLink className="author-header-item" href={facebookUrl} target="_blank" rel="noopener noreferrer">Facebook</OutboundLink>}
                             </div>
                         </div>
                         <div className="author-header-image">

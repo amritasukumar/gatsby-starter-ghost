@@ -7,6 +7,7 @@ import Img from 'gatsby-image'
 
 import { Navigation } from '.'
 import config from '../../utils/siteConfig'
+import { OutboundLink } from 'gatsby-plugin-google-analytics'
 
 // Styles
 import '../../styles/app.css'
@@ -78,19 +79,19 @@ class DefaultLayout extends React.Component {
                                     </Link>
                                 </div>
                                 <div className="site-mast-right">
-                                    <a href={ twitterUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer">
+                                    <OutboundLink href={ twitterUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer">
                                         <img className="site-nav-icon" src="/images/icons/twitter.svg" alt="Twitter" />
-                                    </a>
-                                    <a href={ facebookUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer">
+                                    </OutboundLink>
+                                    <OutboundLink href={ facebookUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer">
                                         <img className="site-nav-icon" src="/images/icons/facebook.svg" alt="Facebook" />
-                                    </a>
-                                    <a href={ instagramUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer">
+                                    </OutboundLink>
+                                    <OutboundLink href={ instagramUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer">
                                         <img className="site-nav-icon" src="/images/icons/instagram.svg" alt="Instagram" />
-                                    </a>
-                                    <a href={ linkedinUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer">
+                                    </OutboundLink>
+                                    <OutboundLink href={ linkedinUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer">
                                         <img className="site-nav-icon" src="/images/icons/linkedin.svg" alt="Linkedin" />
-                                    </a>
-                                    <a className="site-nav-item" href={ `https://feedly.com/i/subscription/feed/${config.siteUrl}/rss/` } target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/rss.svg" alt="RSS Feed" /></a>
+                                    </OutboundLink>
+                                    <OutboundLink className="site-nav-item" href={ `https://feedly.com/i/subscription/feed/${config.siteUrl}/rss/` } target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/rss.svg" alt="RSS Feed" /></OutboundLink>
                                 </div>
                             </div>
                             { isHome ?
@@ -136,14 +137,14 @@ class DefaultLayout extends React.Component {
                             />
                             <span className="subscribe-terms">By entering your email, you agree to receive this and other marketing content
                             about YouPaired. You may opt-out of future marketing emails at any time.
-                            Read our <a href="https://youpaired.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy here</a>.</span>
+                            Read our <OutboundLink href="https://youpaired.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy here</OutboundLink>.</span>
                             <input type="submit" className="email-button" value="SUBSCRIBE"/>
                         </form> }
                     </section>
                     <footer className="site-foot">
                         <div className="site-foot-nav container">
                             <div className="site-foot-nav-left">
-                                <a href="https://youpaired.com" target="_blank" rel="noopener noreferrer">YouPaired</a> © 2019
+                                <OutboundLink href="https://youpaired.com" target="_blank" rel="noopener noreferrer">YouPaired</OutboundLink> © 2019
                             </div>
                             <div className="site-foot-nav-right">
                                 <Navigation data={site.navigation} navClass="site-foot-nav-item" />

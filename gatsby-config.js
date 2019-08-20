@@ -34,6 +34,12 @@ module.exports = {
         siteUrl: config.siteUrl,
     },
     plugins: [
+        {
+          resolve: `gatsby-plugin-google-analytics`,
+          options: {
+            trackingId: "UA-134600528-2",
+          },
+        },
         /**
          *  Content Plugins
          */
@@ -186,12 +192,5 @@ module.exports = {
                 endpoint: 'https://gmail.us3.list-manage.com/subscribe/post?u=88e8e4ffe09baa80dbb11fefb&amp;id=1943c15848',
             },
         },
-        {
-          resolve: `gatsby-plugin-google-analytics`,
-          options: {
-            trackingId: "UA-134600528-2",
-          },
-        },
-
     ],
 }
